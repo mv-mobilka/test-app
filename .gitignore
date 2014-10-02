@@ -1,0 +1,4 @@
+app/hooks/*
+app/platforms/*
+app/plugins/*
+app/www/js/vendor/*

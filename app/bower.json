@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "devDependencies": {},
+  "dependencies": {
+    "angularjs": "~1.2.23",
+    "angular-ui-router": "~0.2.11",
+    "angular-touch": "~1.2.25"
+  }
+}
