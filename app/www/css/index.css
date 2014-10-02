@@ -113,3 +113,12 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+a {
+  padding: 1em;
+  margin: 0.5em;
+  background-color: silver;
+  border: 1px solid black;
+  font-weight: bold;
+  text-decoration: none;
+}

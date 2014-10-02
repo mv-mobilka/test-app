@@ -115,7 +115,8 @@ angular.module('myApp', ['fsCordova'])
     var calError = function(message) { alert("Caledar event Error: " + message); };
 
     window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,calSuccess,calError);
-
+    
+    $scope.device = device;
   });
 }]);
 

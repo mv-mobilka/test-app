@@ -32,6 +32,12 @@ under the License.
       <p>Hello {{greetMe}}!</p>
       <p>Position: {{position.coords.latitude}} : {{position.coords.longitude}} vyska: {{position.coords.altitude}}</p>
       <p>Accel: {{acceleration.x}} - {{acceleration.y}} - {{acceleration.z}}</p>
+      <p>Model: {{device.model}}, Platform: {{device.platform}}, Version: {{device.version}}, UUID: {{device.uuid}}</p>
+      <p>
+        <a href="#" onclick="navigator.notification.beep(2); return false;">pipni</a>
+        <a href="#" onclick="navigator.notification.vibrate(500); return false;">vibruj</a>
+        <a href="#" onclick="window.plugin.notification.local.add({ message: 'Great app!' }); return false;">notifikace</a>
+      </p>
 
     </div>
 

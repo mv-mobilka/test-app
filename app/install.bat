@@ -11,6 +11,9 @@ call phonegap plugin add com.phonegap.plugins.barcodescanner
 call phonegap plugin add https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git
 call phonegap plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
 call phonegap plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git
+call phonegap plugin add org.apache.cordova.device
+call phonegap plugin add org.apache.cordova.vibration
+call phonegap plugin add de.appplant.cordova.plugin.local-notification
 
 call phonegap build android
 call phonegap build wp8
