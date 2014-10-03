@@ -11,6 +11,17 @@
     }
   },
   {
+    "label": "android RUN",
+    "cmd": "phonegap run android",
+    "args": [],
+    "key": "Ctrl-Alt-Shift-W",
+    "opts": {
+      "defaultPath": "./app",
+      "hiddenConsole": false,
+      "killCmd": ""
+    }
+  },
+  {
     "label": "run in app",
     "cmd": "call $0",
     "args": [ "command" ],

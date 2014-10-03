@@ -29,49 +29,75 @@ angular.module('fsCordova', [])
 ** JSNLOG
 */
 angular.module('logToServer', [])
-.service('$log', function () {
+.factory('$log', function () {
   var appender1= JL.createAjaxAppender().setOptions({
-    "url":"http://localhost/server/api/jsnlog",
+    "url":"http://192.168.100.222/server/api/jsnlog",
     "bufferSize": 100,
     "storeInBufferLevel": JL.getAllLevel(),
     "level": JL.getWarnLevel(),
     "sendWithBufferLevel": JL.getWarnLevel()
   });
-  var appender2= JL.createConsoleAppender();
-  this.logger = JL('Angular').setOptions({"appenders": [appender1, appender2]});
+  var logger = JL('Angular').setOptions({"appenders": [appender1]});
+  var service = {
+    DEBUG: JL.getDebugLevel(),
+    INFO: JL.getInfoLevel(),
+    WARN: JL.getWarnLevel(),
+    ERROR: JL.getErrorLevel(),
+    FATAL: JL.getFatalLevel(),
+  };
 
-  this.log = function ( level, msg) {
-    this.logger.log( level, msg);
+  service.log = function ( level, msg) {
+    console.log('JSNLOG', level, msg);
+    logger.log( level, JSON.prune(msg));
   };
-  this.debug = function (msg) {
-    this.logger.debug(msg);
+
+  service.debug = function (msg) {
+    service.log( service.DEBUG, msg);
   };
-  this.info = function (msg) {
-    this.logger.info(msg);
+  service.info = function (msg) {
+    service.log( service.INFO, msg);
   };
-  this.warn = function (msg) {
-    this.logger.warn(msg);
+  service.warn = function (msg) {
+    service.log( service.WARN, msg);
   };
-  this.error = function (msg) {
-    this.logger.error(msg);
+  service.error = function (err) {
+    var msg = {
+      message: err.message,
+      stack: err.stack,
+      raw: err
+    };
+    service.log( service.ERROR, msg);
   };
-  this.DEBUG = JL.getDebugLevel();
-  this.INFO = JL.getInfoLevel();
-  this.WARN = JL.getWarnLevel();
-  this.ERROR = JL.getErrorLevel();
-  this.FATAL = JL.getFatalLevel();
+  service.send = function () {
+    service.log( service.FATAL, {});
+  };
+
+  return service;
 });
 
 /*
 ** MAIN APP
 */
 angular.module('myApp', ['fsCordova', 'logToServer'])
-.controller('MyController', ['$scope', 'CordovaService', function ($scope, CordovaService, $log) {
+.controller('MyController', ['$scope', 'CordovaService', '$log', function ($scope, CordovaService, $log) {
   console.log('MyController');
 
   $scope.greetMe = 'World';
+  $scope.sendLog = function () { $log.send(); };
 
-  $log.log( $log.FATAL, "Starting Angular APP" );
+  $log.info({
+    fce: 'App.start',
+    navigator: {
+      platform:       navigator.platform,
+      cookieEnabled:  navigator.cookieEnabled,
+      doNotTrack:     navigator.doNotTrack,
+      geolocation:    navigator.geolocation,
+      product:        navigator.product,
+      productSub:     navigator.productSub,
+      userAgent:      navigator.userAgent,
+      vendor:         navigator.vendor
+    }
+  });
 
   CordovaService.ready.then( function() {
     console.log('CordovaService.ready');
