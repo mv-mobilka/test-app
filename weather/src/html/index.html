@@ -39,11 +39,13 @@
         <div class="btn-group justified">
         </div>
       </div>
-      
+
       <!-- App Body -->
-      <div class="app-body">
-        <ng-view class="app-content"></ng-view>
-      </div>
+      <div class="app-body row">
+        <div class="span12 ui-view-container">
+          <div class="well" ui-view class="app-content"></div>        
+        </div>
+      </div> 
     </div><!-- ~ .app -->
   </body>
 </html>
