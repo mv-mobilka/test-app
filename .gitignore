@@ -2,3 +2,13 @@ app/hooks/*
 app/platforms/*
 app/plugins/*
 app/www/js/vendor/*
+
+weather/hooks/*
+weather/platforms/*
+weather/plugins/*
+weather/www/*
+weather/bower_component/*
+weather/node_modules/*
+weather/.cordova/*
+
+
