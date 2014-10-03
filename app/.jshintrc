@@ -18,5 +18,5 @@
   "strict": false,
   "trailing": true,
   "smarttabs": true,
-  "predef": [ "angular", "navigator" ]
+  "predef": [ "angular", "navigator", "JL" ]
 }

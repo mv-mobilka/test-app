@@ -1,3 +1,6 @@
+/*
+** FS CORDOVA
+*/
 angular.module('fsCordova', [])
 .service('CordovaService', ['$document', '$q', function($document, $q) {
 
@@ -22,11 +25,53 @@ angular.module('fsCordova', [])
   }, 3000);
 }]);
 
-angular.module('myApp', ['fsCordova'])
-.controller('MyController', ['$scope', 'CordovaService', function ($scope, CordovaService) {
+/*
+** JSNLOG
+*/
+angular.module('logToServer', [])
+.service('$log', function () {
+  var appender1= JL.createAjaxAppender().setOptions({
+    "url":"http://localhost/server/api/jsnlog",
+    "bufferSize": 100,
+    "storeInBufferLevel": JL.getAllLevel(),
+    "level": JL.getWarnLevel(),
+    "sendWithBufferLevel": JL.getWarnLevel()
+  });
+  var appender2= JL.createConsoleAppender();
+  this.logger = JL('Angular').setOptions({"appenders": [appender1, appender2]});
+
+  this.log = function ( level, msg) {
+    this.logger.log( level, msg);
+  };
+  this.debug = function (msg) {
+    this.logger.debug(msg);
+  };
+  this.info = function (msg) {
+    this.logger.info(msg);
+  };
+  this.warn = function (msg) {
+    this.logger.warn(msg);
+  };
+  this.error = function (msg) {
+    this.logger.error(msg);
+  };
+  this.DEBUG = JL.getDebugLevel();
+  this.INFO = JL.getInfoLevel();
+  this.WARN = JL.getWarnLevel();
+  this.ERROR = JL.getErrorLevel();
+  this.FATAL = JL.getFatalLevel();
+});
+
+/*
+** MAIN APP
+*/
+angular.module('myApp', ['fsCordova', 'logToServer'])
+.controller('MyController', ['$scope', 'CordovaService', function ($scope, CordovaService, $log) {
   console.log('MyController');
 
   $scope.greetMe = 'World';
+
+  $log.log( $log.FATAL, "Starting Angular APP" );
 
   CordovaService.ready.then( function() {
     console.log('CordovaService.ready');
@@ -55,7 +100,7 @@ angular.module('myApp', ['fsCordova'])
             message = 'Retrieving your position timeouted.';
             break;
           default:
-          message = 'Retrieving your position failed for unknown reason. Error code: ' + error.code + '. Error message: ' + error.message;
+            message = 'Retrieving your position failed for unknown reason. Error code: ' + error.code + '. Error message: ' + error.message;
         }
         alert( message );
       }, 
@@ -115,17 +160,24 @@ angular.module('myApp', ['fsCordova'])
     var calError = function(message) { alert("Caledar event Error: " + message); };
 
     window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,calSuccess,calError);
-    
+
     $scope.device = device;
   });
 }]);
 
-var onDeviceReady = function() {
-  console.log('event: onDeviceReady');
-  angular.bootstrap( document, ['myApp']);
-  document.removeEventListener('deviceready');
+var start = {
+  deviceReady: false,
+  documentReady: false,
+  onReady: function onReady(event) {
+    console.log(event + ' READY');
+    start[event] = true;
+    if (start.deviceReady || start.documentReady) {
+      console.log('starting Angular');
+      angular.bootstrap( document, ['myApp']);
+      delete start.onReady;
+      start.onReady = function onReadyFoo() {};
+    }
+  }
 };
-document.addEventListener('deviceready', onDeviceReady);
-//angular.element(document).ready(function() {
-//  angular.bootstrap(document, ['myApp']);
-//});
+document.addEventListener('deviceready', start.onReady('deviceReady'));
+document.addEventListener('ready', start.onReady('documentReady'));

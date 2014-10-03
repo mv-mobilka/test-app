@@ -1,0 +1,24 @@
+[
+  {
+    "label": "wp8 build",
+    "cmd": "phonegap build wp8",
+    "args": [],
+    "key": "Ctrl-Alt-Shift-W",
+    "opts": {
+      "defaultPath": "./app",
+      "hiddenConsole": false,
+      "killCmd": ""
+    }
+  },
+  {
+    "label": "run in app",
+    "cmd": "call $0",
+    "args": [ "command" ],
+    "key": "Ctrl-Alt-Shift-R",
+    "opts": {
+      "defaultPath": "./app",
+      "hiddenConsole": false,
+      "killCmd": ""
+    }
+  }
+]
