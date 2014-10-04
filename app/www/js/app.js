@@ -173,21 +173,6 @@ angular.module('myApp', ['fsCordova', 'logToServer'])
     );
     window.alert = navigator.notification.alert;
 
-    /*
-    ** Calendar
-    ** !! Jen IOS a Android
-    */
-
-    var startDate = new Date(2014,9,2,18,30,0,0,0); // beware: month 0 = january, 11 = december
-    var endDate = new Date(2014,9,2,19,30,0,0,0);
-    var title = "TEST";
-    var location = "praha";
-    var notes = "Need to do a skype meeting with the lead.";
-    var calSuccess = function(message) { alert("Caledar event added: " + JSON.stringify(message)); };
-    var calError = function(message) { alert("Caledar event Error: " + message); };
-
-    window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,calSuccess,calError);
-
     $scope.device = device;
   });
 }]);
@@ -221,4 +206,38 @@ function test_scan() {
         alert("Scanning failed: " + error);
     }
   );
+}
+
+function calendar_add() {
+    /*
+    ** Calendar
+    ** !! Jen IOS a Android
+    */
+
+    var startDate = new Date(2014,9,2,18,30,0,0,0); // beware: month 0 = january, 11 = december
+    var endDate = new Date(2014,9,2,19,30,0,0,0);
+    var title = "TEST";
+    var location = "praha";
+    var notes = "Need to do a skype meeting with the lead.";
+    var calSuccess = function(message) { alert("Caledar event added: " + JSON.stringify(message)); };
+    var calError = function(message) { alert("Caledar event Error: " + message); };
+
+    window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,calSuccess,calError);
+}
+
+function calendar_add_interact() {
+    /*
+    ** Calendar
+    ** !! Jen IOS a Android
+    */
+
+    var startDate = new Date(2014,9,2,18,30,0,0,0); // beware: month 0 = january, 11 = december
+    var endDate = new Date(2014,9,2,19,30,0,0,0);
+    var title = "TEST";
+    var location = "praha";
+    var notes = "Need to do a skype meeting with the lead.";
+    var calSuccess = function(message) { alert("Caledar event added: " + JSON.stringify(message)); };
+    var calError = function(message) { alert("Caledar event Error: " + message); };
+
+    window.plugins.calendar.createEventInteractively(title,location,notes,startDate,endDate,calSuccess,calError);
 }
