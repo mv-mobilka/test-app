@@ -121,4 +121,5 @@ a {
   border: 1px solid black;
   font-weight: bold;
   text-decoration: none;
+  display: inline-block;
 }

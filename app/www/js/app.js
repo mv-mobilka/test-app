@@ -32,6 +32,7 @@ angular.module('logToServer', [])
 .factory('$log', function () {
   var appender1= JL.createAjaxAppender().setOptions({
     "url":"http://192.168.100.222/server/api/jsnlog",
+//    "url":"http://172.16.10.3/mv-mobilka/mv-co-delat-kdyz/be/server/api/jsnlog",
     "bufferSize": 100,
     "storeInBufferLevel": JL.getAllLevel(),
     "level": JL.getWarnLevel(),
@@ -207,3 +208,17 @@ var start = {
 };
 document.addEventListener('deviceready', start.onReady('deviceReady'));
 document.addEventListener('ready', start.onReady('documentReady'));
+
+function test_scan() {
+  cordova.plugins.barcodeScanner.scan(
+    function (result) {
+        alert("We got a barcode\n" +
+              "Result: " + result.text + "\n" +
+              "Format: " + result.format + "\n" +
+              "Cancelled: " + result.cancelled);
+    }, 
+    function (error) {
+        alert("Scanning failed: " + error);
+    }
+  );
+}

@@ -34,9 +34,10 @@ under the License.
       <p>Accel: {{acceleration.x}} - {{acceleration.y}} - {{acceleration.z}}</p>
       <p>Model: {{device.model}}, Platform: {{device.platform}}, Version: {{device.version}}, UUID: {{device.uuid}}</p>
       <p>
-        <a href="#" click="navigator.notification.beep(2); return false;">pipni</a>
-        <a href="#" click="navigator.notification.vibrate(500); return false;">vibruj</a>
-        <a href="#" click="window.plugin.notification.local.add({ message: 'Great app!' }); return false;">notifikace</a>
+        <a href="#" onclick="navigator.notification.beep(2); return false;">pipni</a>
+        <a href="#" onclick="navigator.notification.vibrate(500); return false;">vibruj</a>
+        <a href="#" onclick="window.plugin.notification.local.add({ message: 'Great app!' }); return false;">notifikace</a>
+        <a href="#" onclick="test_scan(); return false;">barcode</a>
         <a href="#" ng-click="sendLog();">SEND LOG</a>
       </p>
 
