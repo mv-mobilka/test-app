@@ -6,6 +6,7 @@
     "angularjs": "~1.2.23",
     "angular-ui-router": "~0.2.11",
     "angular-touch": "~1.2.25",
-    "jsnlog": "~2.7.5"
+    "jsnlog": "~2.7.5",
+    "angular-qrcode": "latest"
   }
 }

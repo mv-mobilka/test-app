@@ -79,7 +79,7 @@ angular.module('logToServer', [])
 /*
 ** MAIN APP
 */
-angular.module('myApp', ['fsCordova', 'logToServer'])
+angular.module('myApp', ['fsCordova', 'logToServer', 'monospaced.qrcode'])
 .controller('MyController', ['$scope', 'CordovaService', '$log', function ($scope, CordovaService, $log) {
   console.log('MyController');
 
