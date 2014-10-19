@@ -241,3 +241,38 @@ function calendar_add_interact() {
 
     window.plugins.calendar.createEventInteractively(title,location,notes,startDate,endDate,calSuccess,calError);
 }
+
+function down_file1(url) {
+    alert('down file ' + url);
+
+    var fileTransfer = new FileTransfer();
+    var uri = encodeURI(url);
+    var fileURL = 'file://sdcard/test.pdf';
+    
+    fileTransfer.download(
+        uri,
+        fileURL,
+        function(entry) {
+            alert("download complete: " + entry.toURL());
+        },
+        function(error) {
+            alert("download error source " + error.source);
+            alert("download error target " + error.target);
+            alert("upload error code" + error.code);
+        },
+        true
+    );
+}
+
+function down_file3(url) {
+    handleDocumentWithURL(
+      function() {alert('success');},
+      function(error) {
+        alert('failure');
+        if(error == 53) {
+          alert('No app that handles this file type.');
+        }
+      }, 
+      'http://brabo.cz/temp/test.pdf'
+    );
+}

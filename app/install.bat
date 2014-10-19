@@ -14,6 +14,9 @@ call phonegap plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-
 call phonegap plugin add org.apache.cordova.device
 call phonegap plugin add org.apache.cordova.vibration
 call phonegap plugin add de.appplant.cordova.plugin.local-notification
+call phonegap plugin add org.apache.cordova.file-transfer
+call phonegap plugin add org.apache.cordova.inappbrowser
+call phonegap plugin add https://github.com/ti8mag/DocumentHandler
 
 call phonegap build android
 call phonegap build wp8
